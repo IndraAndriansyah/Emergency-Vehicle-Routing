@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SITIKAR MAP</title>
+    <meta name='viewport'
+          content='width=device-width,initial-scale=1,maximum-scale=1' />
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css'>
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0//SearchBox.css'/>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0//SearchBox-web.js'></script>
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.57.0/maps/css-styles/traffic-incidents.css" />
+    <link rel='stylesheet' type='text/css' href='./static/UI/index.css'/>  <!--tampilan UI-->
+    <link rel='stylesheet' type='text/css' href='./static/UI/routing.css'/>
+    <link rel="stylesheet" type="text/css" href="./static/UI/styles.css" />
+    <link rel='stylesheet' type='text/css' href='./static/UI/poi.css'/>
+    <link rel='stylesheet' type='text/css' href='./static/UI/traffic-incidents.css'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/javascript-debounce@1.0.1/dist/javascript-debounce.min.js'></script>
+    <script type='text/javascript' src='./static/js/dom-helpers.js'></script>
+    <script type='text/javascript' src='./static/js/incidents-details-manager.js'></script>
+    <script type='text/javascript' src='./static/js/incident-marker.js'></script>
+  </head>
+  <body>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js'></script>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/services/services-web.min.js'></script>
+    <script type='text/javascript' src='./static/js/formatters.js'></script>
+    <script type='text/javascript' src='./static/js/info-hint.js'></script>
+    <script type='text/javascript' src='./static/js/searchbox-enter-submit.js'></script>
+    <script type='text/javascript' src='./static/js/foldable.js'></script>
+    <script type='text/javascript' src='./static/js/tail.select.min.js'></script>
+
+    <div id="map" style="width: 100%; height: 100%">
+      <div id='foldable' class='tt-overlay-panel -left-top -medium js.foldable'>
+        <form id=form>
+          <div id="startSearchBox" class="searchbox-container">
+            <div class="tt-icon tt-icon-size icon-spacing-right -start"></div>
+          </div>
+          <div id="finishSearchBox" class="searchbox-container">
+            <div class="tt-icon tt-icon-size icon-spacing-right -finish"></div>
+          </div>
+        </form>
+      </div>
+      <!--sementara pake ini nanti diganti button right-bottom (masih gagal)-->
+      <div id='foldable' class='tt-overlay-panel -right-top -medium js-foldable' style='width: 200px;'>
+        <div class='tt-form'>
+            <div class='tt-spacing-top-24'>
+                <label class='tt-form-label'>Traffic layers</label>
+                <input type='checkbox' class='tt-checkbox' id='incidents' >
+                <label class='tt-label' for="incidents">Incidents</label>
+                <input type='checkbox' class='tt-checkbox' id='flow' >
+                <label class='tt-label' for="flow">Flow</label>
+            </div>
+        </div>
+      </div> <!--end -->
+    </div>
+    
+    <script src="./static/app.js"></script>
+    <script src="./static/js/poi.js"></script>
+    <script src="./static/js/route-with-searchbar.js"></script>
+    <script src="./static/js/traffic-incidents-detail.js"></script>
+    <script src="./static/js/copyrights.js"></script>
+    <!--1.testing 2.poi 3.route 4.traffic 5.copyrights-->
+  </body>
+</html>
