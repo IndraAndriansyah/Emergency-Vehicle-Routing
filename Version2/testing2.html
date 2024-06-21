@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Testing Response |SITKAR</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Boxicons CDN Link -->
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css'>
+    <link rel='stylesheet' type='text/css' href='./UI/index.css'/> 
+    <link rel='stylesheet' type='text/css' href='./UI/routing.css'/>
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0//SearchBox.css'/>
+    
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.57.0/maps/css-styles/traffic-incidents.css" />
+    <!--<link rel="stylesheet" type="text/css" href="./UI/styles.css" />-->
+    
+    <link rel='stylesheet' type='text/css' href='./jstesting/poi.css'/>
+    <link rel='stylesheet' type='text/css' href='./jstesting/traffic-incidents.css'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/javascript-debounce@1.0.1/dist/javascript-debounce.min.js'></script>
+    <script type='text/javascript' src='./js/dom-helpers.js'></script>
+    <script type='text/javascript' src='./jstesting/incidents-details-manager.js'></script>
+    <script type='text/javascript' src='./jstesting/incident-marker.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/javascript-debounce@1.0.1/dist/javascript-debounce.min.js'></script>
+
+    <style>
+      .name {
+          -webkit-box-orient: vertical;
+          color: #262626;
+          display: -webkit-box;
+          font-family: "Gotham", Helvetica, Arial, sans-serif;
+          font-size: 13px;
+          font-weight: bold;
+          -webkit-line-clamp: 2;
+          margin-top: 8px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+      .category {
+          color: #3f9cd9;
+          font-family: "Gotham", Helvetica, Arial, sans-serif;
+          font-size: 10px;
+          font-weight: bold;
+          margin-top: -10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-transform: uppercase;
+          white-space: nowrap;
+      }
+  </style>
+  
+  
+  </head>
+  <body>
+    
+    <div class="sidebar">
+      <div class="logo-details">
+        <!--<i class="bx bxl-c-plus-plus icon"></i>-->
+        <i class='bx bxl-firefox icon' ></i>
+        <div class="logo_name">SITIKAR</div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <!--<li>
+          <a class="search-panel" id="search-panel">
+            <i class="bx bx-search" ></i>
+            <input type="text" placeholder="Search..." />
+            <div id="search-panel" class="container-fluid pb-4"></div>
+            <span class="tooltip">Search</span>
+          </a>
+        </li>-->
+        <li>
+          <a class="direct-btn" id="directbtn" href="#directbtn">
+            <i class="bx bx-grid-alt" ></i>
+            <span class="links_name">Directions</span>
+          </a>
+          <span class="tooltip">Directions</span>
+        </li>
+        <li>
+          <a class="traffic-btn" id="trafficbtn" href="#trafficbtn">
+            <i class="bx bx-user"></i>
+            <span class="links_name">Traffic</span>
+          </a>
+          <span class="tooltip">Traffic</span>
+        </li>
+        <li>
+          <a class="searchbtn" id="searchbtn" href="#searchbtn">
+            <i class="bx bx-chat"></i>
+            <span class="links_name">Directions</span>
+          </a>
+          <span class="tooltip">Directions</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <!--<li class="profile">
+          <div class="profile-details">
+            <img src="profile.jpg" alt="profileImg" />
+            <div class="name_job">
+              <div class="name">Prem Shahi</div>
+              <div class="job">Web designer</div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>-->
+        
+      </ul>
+      
+    </div>
+    
+    <section class="home-section">
+      <div class="map" id="map">
+      <div class="sidebar">
+        <div class="direct-sidebar js-form" >
+          <div class="title-details">
+            <div class="title_name">Traffic Information</div>
+          </div>
+            <header class='tt-side-panel__header'>
+                <div class="searchbox-wrapper">
+                    <div class='tt-icon icon-spacing -start'></div>
+                    <div id='startSearchBox' class='tt-form-label searchbox'></div>
+                </div>
+                <div class="searchbox-wrapper">
+                    <div class='tt-icon icon-spacing -finish'></div>
+                    <div id='finishSearchBox' class='tt-form-label searchbox'></div>
+                </div>
+            </header>
+            <div class='tt-tabs js-tabs'>
+                <div class='tt-tabs__panel'>
+                    <div class='tt-results-list js-results'></div>
+                    <div class='js-results-loader' hidden='hidden'>
+                        <div class='loader-center'><span class='loader'></span></div>
+                    </div>
+                    <div class='tt-tabs__placeholder js-results-placeholder -small'>
+                        For results choose starting and destination points.
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="traffic-sidebar" >
+          <div class="title-details">
+            <div class="title_name">Traffic Information</div>
+          </div>
+          <ul class="nav-list">
+            <li>
+              <a class="traffic-btn" id="traffic" href="#trafficbtn">
+                <i class="bx bx-grid-alt" ></i>
+                <span class="links_name">Traffic Incidents</span>
+                <div class="swicth">
+                  <input type="checkbox" class="switch" id="incidents-toggle">
+                  <label for="incidents-toggle"></label>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="traffic-btn" id="trafficbtn" href="#trafficbtn">
+                <i class="bx bx-grid-alt" ></i>
+                <span class="links_name">Traffic Flow</span>
+                <div class="swicth">
+                  <input type="checkbox" class="switch" id="flow-toggle">
+                  <label for="flow-toggle"></label>
+                </div>
+              </a>
+            </li>
+            <div class="tt-side-panel__header -traffic"></div>
+            <div class='tt-overflow'>
+              <div class='js-results'></div>
+          </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+      
+      <!--<div class="text">Dashboard</div>-->
+      
+    </section>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js'></script>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/services/services-web.min.js'></script>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.2.0//SearchBox-web.js'></script>
+    <script type='text/javascript' src='./js/formatters.js'></script>
+    <script type='text/javascript' src='./js/info-hint.js'></script>
+    <script type='text/javascript' src='./js/searchbox-enter-submit.js'></script>
+    <script type='text/javascript' src='./js/foldable.js'></script>
+    <script type='text/javascript' src='./js/tail.select.min.js'></script>
+    <script type='text/javascript' src='./js/search-marker.js'></script>
+    <script type='text/javascript' src='./js/search-markers-manager.js'></script>
+    <script type='text/javascript' src='./js/search-results-parser.js'></script>
+    <script type='text/javascript' src='./jstesting/results-manager.js'></script>
+    <script type='text/javascript' src='./js/dom-helpers.js'></script>
+    <script type='text/javascript' src='./jstesting/side-panel.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+
+
+    <script src="script.js"></script>
+    <script src="map.js"></script>
+    <script src="searchbox-main.js"></script>
+    <script src="routing-system.js"></script>
+    
+    
+    <!--<script src="incident-detail.js"></script>-->
+    
+  </body>
+</html>
